@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pep8 = "*"
+autopep8 = "*"
+v = {editable = true,version = "*"}
+
+[packages]
+tweepy = "*"
+python-dotenv = "*"
+textblob = "*"
+django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+
+[requires]
+python_version = "3.7"
