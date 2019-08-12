@@ -10,10 +10,13 @@
 
     Future Features :rocket:
     ✅ API Boilerplate
-    :white_square_button: Add Some Extra Params to the whole twitter search to spice things up.
-    :white_square_button: Approval/Disapproval Report (And Store The Reports)
-    :white_square_button: Trigger Any Sentiment Analysis From Anywhere! :round_pushpin:
-    :white_square_button: Display THe Reports In a Nice looking page
+    * [ ] unchecked # [checkbox:unchecked]
+    * [x] checked   # [checkbox:checked]
+    * [X] checked   # [checkbox:checked]
+    [ ] Add Some Extra Params to the whole twitter search to spice things up.
+    [ ] Approval/Disapproval Report (And Store The Reports)
+    [ ] Trigger Any Sentiment Analysis From Anywhere! :round_pushpin:
+    [ ] Display THe Reports In a Nice looking page
 
 ### Tools And Stuff (Or Just Do ```pipenv install```)
 
