@@ -10,9 +10,6 @@
 
     Future Features :rocket:
     ✅ API Boilerplate
-    * [ ] unchecked # [checkbox:unchecked]
-    * [x] checked   # [checkbox:checked]
-    * [X] checked   # [checkbox:checked]
     [ ] Add Some Extra Params to the whole twitter search to spice things up.
     [ ] Approval/Disapproval Report (And Store The Reports)
     [ ] Trigger Any Sentiment Analysis From Anywhere! :round_pushpin:
