@@ -11,25 +11,25 @@
 
 > You might say "Hey, but you're getting started!" and proly you're right, but I want to use this as a check list of features I want to add in the future.
 
-    | Features :rocket:         |        Done        |
-    |---------------------------|--------------------|
-    | API Boilerplate           | :white_check_mark: |
-    | Search Any User           |  |
-    | Approval Report           |  |
-    | Trigger From Anywhere     |  |
-    | Display Reports           |  |
+| Future Features :rocket:         |        Done        |
+|----------------------------------|--------------------|
+| API Boilerplate                  | :white_check_mark: |
+| Search Any User                  | :heavy_minus_sign: |
+| Approval Report                  | :heavy_minus_sign: |
+| Trigger From Anywhere            | :heavy_minus_sign: |
+| Display Reports                  | :heavy_minus_sign: |
 
 ### Tools And Stuff (Or Just Do ```pipenv install```)
 
 > Here's the whole list of the tools I'm using to make this happen:
 
-    - Python 3.X
-    - Conda
-    - Pipenv
-    - Django
-    - Tweepy
-    - python-dotenv
-    - textblob
+- Python 3.X
+- Conda
+- Pipenv
+- Django
+- Tweepy
+- python-dotenv
+- textblob
 
 ### Reasons why I did this
 
