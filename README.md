@@ -1,5 +1,8 @@
 # BearBot (Not An Actual :bear:)
 
+![Version](https://img.shields.io/badge/version-0.1-brightgreen.svg?style=flat-square)
+![Version](https://img.shields.io/badge/release-alpha-green.svg?style=flat-square)
+
 > Yo! This is my first ***formal*** approach to a bot. Essentially this bot :robot: is going read through a **twitter user's tweets** and create a sentiment analysis report (If your tweet was 'Positive', 'Negative' Or 'Neutral').
 
 **NOTE:** In the future I'll pour more love to this
@@ -8,12 +11,13 @@
 
 > You might say "Hey, but you're getting started!" and proly you're right, but I want to use this as a check list of features I want to add in the future.
 
-    Future Features :rocket:
-    ✅ API Boilerplate
-    [ ] Add Some Extra Params to the whole twitter search to spice things up.
-    [ ] Approval/Disapproval Report (And Store The Reports)
-    [ ] Trigger Any Sentiment Analysis From Anywhere! :round_pushpin:
-    [ ] Display THe Reports In a Nice looking page
+    | Features :rocket:         |        Done        |
+    |---------------------------|--------------------|
+    | API Boilerplate           | :white_check_mark: |
+    | Search Any User           |  |
+    | Approval Report           |  |
+    | Trigger From Anywhere     |  |
+    | Display Reports           |  |
 
 ### Tools And Stuff (Or Just Do ```pipenv install```)
 
