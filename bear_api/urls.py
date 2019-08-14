@@ -6,6 +6,5 @@ from bear_api import views
 # router.register(r'questions', views.QuestionsViewSet)
 
 urlpatterns = [
-    # url(r'^test/?$', views.Testing.as_view()),
-    url(r'^testing/?$', views.Testing.as_view())
+    url(r'^user/?$', views.Users.as_view())
 ]
