@@ -1,0 +1,7 @@
+Exception #0 - MESSAGE: Not authorized. - [ERR] Retrieving tweets
+Exception #0 - MESSAGE: Not authorized. - [ERR] Retrieving tweets
+Exception #0 - MESSAGE: Not authorized. - [ERR] Retrieving tweets
+Exception #0 - MESSAGE: ----asdkalskdl - [ERR] Failed to retrieve the specified user
+Exception #0 - MESSAGE: Yo! I need the user account - [ERR] Failed to retrieve the specified user
+Exception #0 - MESSAGE: Yo! I need the user account - [ERR] Failed to retrieve the specified user
+Exception #0 - MESSAGE: 'ResultSet' object has no attribute 'keys' - [ERR] Failed to retrieve the specified user
