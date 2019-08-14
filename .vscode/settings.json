@@ -1,3 +1,5 @@
 {
-    "python.pythonPath": "/Users/Jose/.local/share/virtualenvs/BearBot--kE5MdjB/bin/python"
+    "python.pythonPath": "/Users/Jose/.local/share/virtualenvs/BearBot--kE5MdjB/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.pep8Enabled": true
 }
