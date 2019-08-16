@@ -22,12 +22,6 @@ class TweetsModule:
         self.api = api
         self.logger = logger
 
-    def update_status(self, tweet: str):
-        try:
-            self.api.update_status(tweet)
-        except Exception as e:
-            self.logger(str(e), Constants.UPDATING_STATUS)
-
     def find(self, user: str, count: int, page: int):
         if user[0] != '@':
             user = '@' + user
@@ -46,12 +40,43 @@ class TweetsModule:
             })
         return users
 
-    def get_tweets(self, user: str):
+    def generate_analysis(self, user: str, tweet_count: int):
+        try:
+            tweets = self.__get_tweets(user, tweet_count)
+            pos_tweets = [tw for tw in tweets if tw['sentiment'] == 'positive']
+            neg_tweets = [tw for tw in tweets if tw['sentiment'] == 'negative']
+            neutral_tweets = 100 * (len(tweets) - len(neg_tweets) - len(pos_tweets)) / len(tweets)  # nopep8
+            results = {
+                'positive': round(100 * len(pos_tweets) / len(tweets)),
+                'negative': round(100 * len(neg_tweets) / len(tweets)),
+                'neutral': round(100 * (len(tweets) - len(neg_tweets) - len(pos_tweets)) / len(tweets))  # nopep8
+            }
+
+            self.publish(results, user, tweet_count)
+
+            return results
+        except Exception as e:
+            self.logger.log(str(e), Constants.ANALYSING_TWEETS)
+            print('Failed to generate the sentiment analysis!')
+
+    def publish(self, results, usr: str, tweets_count: int):
+            try:
+                tweet = f'Tweet Analysis Complete! \nUser @{usr} - ' \
+                    f'{tweets_count} Tweets Were Used - Results: \n'
+
+                for key in results:
+                    tweet += f'{key.capitalize()} Tweets: {results[key]}% \n'
+
+                self.api.update_status(tweet)
+            except Exception as e:
+                self.logger.log(str(e), Constants.UPDATING_STATUS)
+
+    def __get_tweets(self, user: str, tweet_count: int):
         if user[0] != '@':
             user = '@' + user
         tweets = list()
         try:
-            for tweet in self.api.user_timeline(user, count=200):
+            for tweet in self.api.user_timeline(user, count=tweet_count):
                 parsed_tweet = dict(
                     text=tweet.text,
                     sentiment=self.__get_sentiment(tweet.text)
