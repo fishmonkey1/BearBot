@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from bear_api.models import Report
+
+admin.site.register(Report)
