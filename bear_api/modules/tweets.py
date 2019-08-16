@@ -60,16 +60,16 @@ class TweetsModule:
             print('Failed to generate the sentiment analysis!')
 
     def publish(self, results, usr: str, tweets_count: int):
-            try:
-                tweet = f'Tweet Analysis Complete! \nUser @{usr} - ' \
-                    f'{tweets_count} Tweets Were Used - Results: \n'
+        try:
+            tweet = f'Tweet Analysis Complete! \nUser @{usr} - ' \
+                f'{tweets_count} Tweets Were Used - Results: \n'
 
-                for key in results:
-                    tweet += f'{key.capitalize()} Tweets: {results[key]}% \n'
+            for key in results:
+                tweet += f'{key.capitalize()} Tweets: {results[key]}% \n'
 
-                self.api.update_status(tweet)
-            except Exception as e:
-                self.logger.log(str(e), Constants.UPDATING_STATUS)
+            self.api.update_status(tweet)
+        except Exception as e:
+            self.logger.log(str(e), Constants.UPDATING_STATUS)
 
     def __get_tweets(self, user: str, tweet_count: int):
         if user[0] != '@':
