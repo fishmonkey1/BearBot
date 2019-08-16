@@ -30,13 +30,11 @@ class Users(APIView):
             return Response({'error': str(e)}, status=500)
 
     def __get_whitelisted_params(self, params, args, kwargs):
-        queryp = dict({
+        return dict({
             'account': kwargs['account'] if 'account' in kwargs else None,
             'records': params.get('records', 25),
             'page': params.get('page', 0)
         })
-
-        return queryp
 
 
 if twitter_api is None:
