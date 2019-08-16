@@ -6,5 +6,6 @@ from bear_api import views
 # router.register(r'questions', views.QuestionsViewSet)
 
 urlpatterns = [
-    url(r'^user/?$', views.Users.as_view())
+    url(r'^user/(?P<account>.+)?$', views.Users.as_view()),
+    url(r'^reportg/<str:account>?$', views.Users.as_view()),
 ]

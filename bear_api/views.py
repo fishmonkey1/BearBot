@@ -13,12 +13,11 @@ twitter_module = None
 
 class Users(APIView):
     '''
-        User APIView class that searchs and returns the user
+        User APIView class that looks for the given user (Paginated)
     '''
-
     def get(self, request, *args, **kwargs):
         try:
-            params = self.__get_whitelisted_params(request.query_params)
+            params = self.__get_whitelisted_params(request.query_params, args, kwargs)  # nopep8
             if params['account'] is not None:
                 return Response({
                     'searchedFor': params['account'],
@@ -30,14 +29,15 @@ class Users(APIView):
             logger.log(str(e), Constants.RETRIEVENG_USER)
             return Response({'error': str(e)}, status=500)
 
-    def __get_whitelisted_params(self, params):
+    def __get_whitelisted_params(self, params, args, kwargs):
         queryp = dict({
-            'account': params['account'] if 'account' in params else None,
-            'records': params['records'] if 'records' in params else 25,
-            'page': params['page'] if 'page' in params else 0
+            'account': kwargs['account'] if 'account' in kwargs else None,
+            'records': params.get('records', 25),
+            'page': params.get('page', 0)
         })
 
         return queryp
+
 
 if twitter_api is None:
     logger = Logger()

@@ -1,0 +1,2 @@
+Exception #0 - MESSAGE:  - [ERR] Failed to retrieve the specified user
+Exception #0 - MESSAGE: __get_whitelisted_params() takes 2 positional arguments but 4 were given - [ERR] Failed to retrieve the specified user
