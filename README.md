@@ -14,22 +14,24 @@
 | Future Features :rocket:         |        Done        |
 |----------------------------------|--------------------|
 | API Boilerplate                  | :white_check_mark: |
-| Search Any User                  | :heavy_minus_sign: |
-| Approval Report                  | :heavy_minus_sign: |
+| Search Any User                  | :white_check_mark: |
+| Approval Report                  | :white_check_mark: |
 | Trigger From Anywhere            | :heavy_minus_sign: |
 | Display Reports                  | :heavy_minus_sign: |
 
 ### Tools And Stuff (Or Just Do ```pipenv install```)
 
-> Here's the whole list of the tools I'm using to make this happen:
+> Here's the whole list of the tools I'm using to make this happen :alien:
 
-- Python 3.X
-- Conda
-- Pipenv
-- Django
-- Tweepy
-- python-dotenv
-- textblob
+|-----------------------|
+| Python 3.X            |
+| Pipenv                |
+| Django                |
+| Django Rest Framework |
+| Tweepy                |
+| Python DotEnv         |
+| Textblob              |
+| SQLite 3              |
 
 ### Reasons why I did this
 
