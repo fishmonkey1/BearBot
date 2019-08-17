@@ -21,4 +21,4 @@ class Constants:
     FAILED_REPORT = '[ERR] Failed to create the report for the specified user'
     FAILED_RETRIEVENG_TWEETS = '[ERR] Failed to retrieve the user tweets'
     FAILED_RETRIEVENG_RETWEETS = '[ERR] Failed to retrieve the tweet replies'
-    FAILED_PUBLISH = '[ERR] Failed to publis the report to twitter'
+    FAILED_PUBLISH = '[ERR] Failed to publish the report to twitter'

@@ -137,3 +137,8 @@ Exception #0 - MESSAGE: [{'message': 'Rate limit exceeded', 'code': 88}] - [ERR]
 Exception #0 - MESSAGE: 'NoneType' object is not iterable - [ERR] Analysing tweets
 Exception #0 - MESSAGE: [{'message': 'Rate limit exceeded', 'code': 88}] - [ERR] Retrieving tweets
 Exception #0 - MESSAGE: 'NoneType' object is not iterable - [ERR] Analysing tweets
+Exception #0 - MESSAGE: 'dict' object has no attribute '_meta' - [ERR] Failed to create the report for the specified user
+Exception #0 - MESSAGE: [{'code': 187, 'message': 'Status is a duplicate.'}] - [ERR] Failed to publis the report to twitter
+Exception #0 - MESSAGE: int() argument must be a string, a bytes-like object or a number, not 'dict' - [ERR] Failed to create the report for the specified user
+Exception #0 - MESSAGE: [{'code': 187, 'message': 'Status is a duplicate.'}] - [ERR] Failed to publis the report to twitter
+Exception #0 - MESSAGE: Yo! I need the user account - [ERR] Failed to retrieve the specified user

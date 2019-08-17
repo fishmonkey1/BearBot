@@ -44,10 +44,32 @@ def generate_report(request, *args, **kwargs):
     try:
         report = __get_user_data(request.data)
         report['report'] = twitter_module.generate_analysis(report['user'], request.data['tweet_count'])  # nopep8
+        save_report(report)
         return Response({'result': report})
     except Exception as e:
         logger.log(str(e), Constants.FAILED_REPORT)
         return Response({'error': 'Failed To Generate The Report'}, status=500)
+
+
+def save_report(data):
+    report = Report(
+        user=data['user'],
+        tweets=data['tweets'],
+        followers=data['followers'],
+        following=data['following'],
+        verified=data['verified'],
+        img=data['img'],
+        description=data['description'],
+        url=data['url'],
+        analysis_positive=data['report']['analysis']['positive'],
+        analysis_negative=data['report']['analysis']['negative'],
+        analysis_neutral=data['report']['analysis']['neutral'],
+        acceptance_positive=data['report']['acceptance']['positive'],
+        acceptance_negative=data['report']['acceptance']['negative'],
+        acceptance_neutral=data['report']['acceptance']['neutral']
+    )
+
+    report.save()
 
 
 def __get_whitelisted_params(params, args, kwargs):
