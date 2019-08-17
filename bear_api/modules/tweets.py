@@ -58,7 +58,7 @@ class TweetsModule:
     def publish(self, results, usr: str, tweets_count: int):
         try:
             tweet = f'Tweet Analysis Complete! \nUser @{usr} - ' \
-                f'{tweets_count} Tweets Were Used - Results: \n'
+                f'{tweets_count} Tweets Were Used\n'
             tweet += 'Analysis Report: \n'
             tweet += self.__get_parsed_report(results['analysis'])
             tweet += 'Acceptance Report: \n'
