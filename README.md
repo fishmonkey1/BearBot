@@ -21,8 +21,9 @@
 
 ### Tools And Stuff (Or Just Do ```pipenv install```)
 
-> Here's the whole list of the tools I'm using to make this happen :alien:
+> Here's the whole list of the tools I'm using to make this happen
 
+| Tools :alien:         |
 |-----------------------|
 | Python 3.X            |
 | Pipenv                |
