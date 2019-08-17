@@ -42,7 +42,7 @@ def lookup_report(request, *args, **kwargs):
 @api_view(['POST'])
 def generate_report(request, *args, **kwargs):
     report = __get_user_data(request.data)
-    report['analysis'] = twitter_module.generate_analysis(report['user'], request.data['tweet_count'])  # nopep8
+    report['report'] = twitter_module.generate_analysis(report['user'], request.data['tweet_count'])  # nopep8
     return Response({'result': report})
 
 

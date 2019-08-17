@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8
 import re
+import pdb
 
 import tweepy
 from textblob import TextBlob
@@ -43,14 +44,14 @@ class TweetsModule:
     def generate_analysis(self, user: str, tweet_count: int):
         try:
             tweets = self.__get_tweets(user, tweet_count)
-            pos_tweets = [tw for tw in tweets if tw['sentiment'] == 'positive']
-            neg_tweets = [tw for tw in tweets if tw['sentiment'] == 'negative']
-            neutral_tweets = 100 * (len(tweets) - len(neg_tweets) - len(pos_tweets)) / len(tweets)  # nopep8
-            results = {
-                'positive': round(100 * len(pos_tweets) / len(tweets)),
-                'negative': round(100 * len(neg_tweets) / len(tweets)),
-                'neutral': round(100 * (len(tweets) - len(neg_tweets) - len(pos_tweets)) / len(tweets))  # nopep8
-            }
+            retweets = list()
+            for index in range(10):
+                retweets += self.__get_retweets(tweets[index]['id'])
+
+            results = dict(
+                analysis=self.__get_report(tweets),
+                acceptance=self.__get_report(retweets)
+            )
 
             self.publish(results, user, tweet_count)
 
@@ -63,13 +64,32 @@ class TweetsModule:
         try:
             tweet = f'Tweet Analysis Complete! \nUser @{usr} - ' \
                 f'{tweets_count} Tweets Were Used - Results: \n'
-
-            for key in results:
-                tweet += f'{key.capitalize()} Tweets: {results[key]}% \n'
-
+            tweet += 'Analysis Report: \n'
+            tweet += self.__get_parsed_report(results['analysis'])
+            tweet += 'Acceptance Report: \n'
+            tweet += self.__get_parsed_report(results['acceptance'])
+            tweet += 'Complete Report: '
             self.api.update_status(tweet)
         except Exception as e:
             self.logger.log(str(e), Constants.UPDATING_STATUS)
+
+    def __get_parsed_report(self, report):
+        tweet = ''
+        for key in report:
+                tweet += f'{key.capitalize()} Tweets: {report[key]}% \n'
+
+        return tweet
+
+    def __get_report(self, tweets):
+        pos_tweets_len = len([tw for tw in tweets if tw['sentiment'] == 'positive'])  # nopep8
+        neg_tweets_len = len([tw for tw in tweets if tw['sentiment'] == 'negative'])  # nopep8
+        neutral_tweets_len = 100 * (len(tweets) - neg_tweets_len - pos_tweets_len) / len(tweets)  # nopep8
+
+        return {
+            'positive': round(100 * pos_tweets_len / len(tweets)),
+            'negative': round(100 * neg_tweets_len / len(tweets)),
+            'neutral': round(neutral_tweets_len)
+        }
 
     def __get_tweets(self, user: str, tweet_count: int):
         if user[0] != '@':
@@ -78,6 +98,27 @@ class TweetsModule:
         try:
             for tweet in self.api.user_timeline(user, count=tweet_count):
                 parsed_tweet = dict(
+                    id=tweet.id,
+                    text=tweet.text,
+                    sentiment=self.__get_sentiment(tweet.text)
+                )
+                if tweet.retweet_count > 0:
+                    if parsed_tweet not in tweets:
+                        tweets.append(parsed_tweet)
+                else:
+                    tweets.append(parsed_tweet)
+
+            return tweets
+        except Exception as e:
+            self.logger.log(str(e), Constants.RETRIEVING_TWEETS)
+            print(str(e))
+
+    def __get_retweets(self, tweet_id):
+        tweets = list()
+        try:
+            for tweet in self.api.retweets(tweet_id, count=15):
+                parsed_tweet = dict(
+                    id=tweet.id,
                     text=tweet.text,
                     sentiment=self.__get_sentiment(tweet.text)
                 )
