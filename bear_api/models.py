@@ -7,7 +7,7 @@ class Report(models.Model):
     followers = models.IntegerField()
     following = models.IntegerField()
     verified = models.BooleanField()
-    img = models.TextField(default='https://pbs.twimg.com/profile_images/661318201473544192/QYYw4uBv.png')  # nopep8
+    img = models.TextField(default='https://pbs.twimg.com/profile_images/661318201473544192/QYYw4uBv.png')
     description = models.TextField(default=' ')
     url = models.TextField(default='https://twitter.com/home')
     analysis_positive = models.IntegerField()

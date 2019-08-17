@@ -71,14 +71,14 @@ class TweetsModule:
     def __get_parsed_report(self, report):
         tweet = ''
         for key in report:
-                tweet += f'  - {key.capitalize()} Tweets: {report[key]}% \n'
+            tweet += f'  - {key.capitalize()} Tweets: {report[key]}% \n'
 
         return tweet
 
     def __get_report(self, tweets):
-        pos_tweets_len = len([tw for tw in tweets if tw['sentiment'] == 'positive'])  # nopep8
-        neg_tweets_len = len([tw for tw in tweets if tw['sentiment'] == 'negative'])  # nopep8
-        neutral_tweets_len = 100 * (len(tweets) - neg_tweets_len - pos_tweets_len) / len(tweets)  # nopep8
+        pos_tweets_len = len([tw for tw in tweets if tw['sentiment'] == 'positive'])
+        neg_tweets_len = len([tw for tw in tweets if tw['sentiment'] == 'negative'])
+        neutral_tweets_len = 100 * (len(tweets) - neg_tweets_len - pos_tweets_len) / len(tweets)
 
         return {
             'positive': round(100 * pos_tweets_len / len(tweets)),

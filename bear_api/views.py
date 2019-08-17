@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from bear_api.models import Report
 from bear_api.modules.tweets import TweetsModule
-from bear_api.serializers import ReportSerializer
+from bear_api.serializers import ReportSerializer, SearchListSerializer
 from bear_api.utils.auth import Auth
 from bear_api.utils.constants import Constants
 from bear_api.utils.logger import Logger
@@ -16,11 +16,11 @@ twitter_module = None
 @api_view(['GET'])
 def lookup_user(request, *args, **kwargs):
     try:
-        params = __get_whitelisted_params(request.query_params, args, kwargs)  # nopep8
+        params = __get_whitelisted_params(request.query_params, args, kwargs)
         if params['account'] is not None:
             return Response({
                 'searchedFor': params['account'],
-                'users': twitter_module.find(params['account'], params['records'], params['page'])  # nopep8
+                'users': twitter_module.find(params['account'], params['records'], params['page'])
             })
         else:
             raise Exception('Yo! I need the user account')
@@ -43,12 +43,22 @@ def lookup_report(request, *args, **kwargs):
 def generate_report(request, *args, **kwargs):
     try:
         report = __get_user_data(request.data)
-        report['report'] = twitter_module.generate_analysis(report['user'], request.data['tweet_count'])  # nopep8
+        report['report'] = twitter_module.generate_analysis(report['user'], request.data['tweet_count'])
         save_report(report)
         return Response({'result': report})
     except Exception as e:
         logger.log(str(e), Constants.FAILED_REPORT)
         return Response({'error': 'Failed To Generate The Report'}, status=500)
+
+
+@api_view(['GET'])
+def fetch_search_list(request, *args, **kwargs):
+    try:
+        search_list = Report.objects.all()
+        return Response({'result': SearchListSerializer(search_list, many=True).data})
+    except Exception as e:
+        logger.log(str(e), Constants.FAILED_RETRIEVENG_SEARCH_LIST)
+        return Response({'error': 'Failed To Fetch The Search List'}, status=500)
 
 
 def save_report(data):

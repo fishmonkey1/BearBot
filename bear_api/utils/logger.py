@@ -20,7 +20,7 @@ class Logger:
         last_line = file.readlines()
         if len(last_line) != 0:
             last_line = last_line[-1]
-            counter = last_line[last_line.find('#') + 1: last_line.find('-') - 1]  # nopep8
+            counter = last_line[last_line.find('#') + 1: last_line.find('-') - 1]
             counter = int(counter) + 1
         else:
             counter = 0

@@ -20,5 +20,20 @@ class ReportSerializer(serializers.ModelSerializer):
             'acceptance_positive',
             'acceptance_negative',
             'acceptance_neutral',
-            'created_on',
+            'created_on'
         )
+
+
+class SearchListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Report
+        fields = (
+            'id',
+            'user',
+            'followers',
+            'following',
+            'verified',
+            'img',
+            'created_on'
+        )
+

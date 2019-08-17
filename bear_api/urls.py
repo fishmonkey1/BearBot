@@ -7,5 +7,6 @@ from bear_api import views
 urlpatterns = [
     url(r'^user/(?P<account>.+)?$', views.lookup_user),
     url(r'^report/(?P<id>.+)?$', views.lookup_report),
+    url(r'^searchlist?$', views.fetch_search_list),
     url(r'^analysis?$', views.generate_report),
 ]
