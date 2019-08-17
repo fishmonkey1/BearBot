@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8
 import re
-import pdb
 
 import tweepy
 from textblob import TextBlob
@@ -42,23 +41,19 @@ class TweetsModule:
         return users
 
     def generate_analysis(self, user: str, tweet_count: int):
-        try:
-            tweets = self.__get_tweets(user, tweet_count)
-            retweets = list()
-            for index in range(10):
-                retweets += self.__get_retweets(tweets[index]['id'])
+        tweets = self.__get_tweets(user, tweet_count)
+        retweets = list()
+        for index in range(10):
+            retweets += self.__get_retweets(tweets[index]['id'])
 
-            results = dict(
-                analysis=self.__get_report(tweets),
-                acceptance=self.__get_report(retweets)
-            )
+        results = dict(
+            analysis=self.__get_report(tweets),
+            acceptance=self.__get_report(retweets)
+        )
 
-            self.publish(results, user, tweet_count)
+        self.publish(results, user, tweet_count)
 
-            return results
-        except Exception as e:
-            self.logger.log(str(e), Constants.ANALYSING_TWEETS)
-            print('Failed to generate the sentiment analysis!')
+        return results
 
     def publish(self, results, usr: str, tweets_count: int):
         try:
@@ -68,15 +63,15 @@ class TweetsModule:
             tweet += self.__get_parsed_report(results['analysis'])
             tweet += 'Acceptance Report: \n'
             tweet += self.__get_parsed_report(results['acceptance'])
-            tweet += 'Complete Report: '
+            # tweet += 'Complete Report: '
             self.api.update_status(tweet)
         except Exception as e:
-            self.logger.log(str(e), Constants.UPDATING_STATUS)
+            self.logger.log(str(e), Constants.FAILED_PUBLISH)
 
     def __get_parsed_report(self, report):
         tweet = ''
         for key in report:
-                tweet += f'{key.capitalize()} Tweets: {report[key]}% \n'
+                tweet += f'  - {key.capitalize()} Tweets: {report[key]}% \n'
 
         return tweet
 
@@ -110,8 +105,7 @@ class TweetsModule:
 
             return tweets
         except Exception as e:
-            self.logger.log(str(e), Constants.RETRIEVING_TWEETS)
-            print(str(e))
+            self.logger.log(str(e), Constants.FAILED_RETRIEVENG_TWEETS)
 
     def __get_retweets(self, tweet_id):
         tweets = list()
@@ -130,8 +124,7 @@ class TweetsModule:
 
             return tweets
         except Exception as e:
-            self.logger.log(str(e), Constants.RETRIEVING_TWEETS)
-            print(str(e))
+            self.logger.log(str(e), Constants.FAILED_RETRIEVENG_RETWEETS)
 
     def __get_sentiment(self, tweet: object):
         analysis = TextBlob(self.__clean(tweet))

@@ -25,7 +25,7 @@ def lookup_user(request, *args, **kwargs):
         else:
             raise Exception('Yo! I need the user account')
     except Exception as e:
-        logger.log(str(e), Constants.RETRIEVENG_USER)
+        logger.log(str(e), Constants.FAILED_USER_SEARCH)
         return Response({'error': str(e)}, status=500)
 
 
@@ -35,15 +35,19 @@ def lookup_report(request, *args, **kwargs):
         report = Report.objects.get(id=int(kwargs['id']))
         return Response({'result': ReportSerializer(report).data})
     except Exception as e:
-        logger.log(str(e), Constants.RETRIEVENG_USER)
+        logger.log(str(e), Constants.FAILED_REPORT_SEARCH)
         return Response({'error': 'Report Not Found'}, status=500)
 
 
 @api_view(['POST'])
 def generate_report(request, *args, **kwargs):
-    report = __get_user_data(request.data)
-    report['report'] = twitter_module.generate_analysis(report['user'], request.data['tweet_count'])  # nopep8
-    return Response({'result': report})
+    try:
+        report = __get_user_data(request.data)
+        report['report'] = twitter_module.generate_analysis(report['user'], request.data['tweet_count'])  # nopep8
+        return Response({'result': report})
+    except Exception as e:
+        logger.log(str(e), Constants.FAILED_REPORT)
+        return Response({'error': 'Failed To Generate The Report'}, status=500)
 
 
 def __get_whitelisted_params(params, args, kwargs):

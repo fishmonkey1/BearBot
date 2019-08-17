@@ -27,7 +27,7 @@ class Auth:
             api.verify_credentials()
             return api
         except Exception as e:
-            self.logger.log(str(e), Constants.AUTH_CREDENTIALS)
+            self.logger.log(str(e), Constants.INVALID_AUTH)
             print(Constants.INVALID_AUTH)
 
     def __get_auth_handler(self) -> object:
